@@ -24,25 +24,31 @@ const DisplayItems = () => {
 
 
     return (
-        <Container>
+        <Container className='mt-3'>
             <Row>
-                <Col>
+                <div className="clean-cart">
+                    <button>Empty cart</button>
+                </div>
+            </Row>
+            <Row>
+                <Col md={8} className='cart-detail py-3'>
                     {todos.map((items) => {
                         return (
                             <Row key={items.asin}>
-                                <div className='cart-item'>
-                                    <Col>
-                                        <div className="cart-image-detail">
-                                            <div className="cart-item-img">
-                                                <img src={items.product_photo} alt="Image" className='img-fluid' />
-                                            </div>
-                                            <div className="increase-product">
-                                                <div className="decrease-quantity" onClick={decrease}><FaMinus /></div>
-                                                <div className="item-quantity">{item}</div>
-                                                <div className="increase-quantity" onClick={increase}><FaPlus /></div>
-                                            </div>
+                                {/* <div className='cart-item'> */}
+                                <Col md={2}>
+                                    <div className="cart-image-detail d-flex flex-column align-items-center">
+                                        <div className="cart-item-img">
+                                            <img src={items.product_photo} alt="Image" className='img-fluid' />
                                         </div>
-                                    </Col>
+                                        <div className="increase-product d-flex mt-3">
+                                            <div className="decrease-quantity me-1" onClick={decrease}><FaMinus /></div>
+                                            <div className="item-quantity">{item}</div>
+                                            <div className="increase-quantity ms-1" onClick={increase}><FaPlus /></div>
+                                        </div>
+                                    </div>
+                                </Col>
+                                <Col>
                                     <Col>
                                         <div className="cart-item-details">
                                             <div className="item-title">{items.product_title}</div>
@@ -64,7 +70,8 @@ const DisplayItems = () => {
                                             <p>Remove</p>
                                         </div>
                                     </Col>
-                                </div>
+                                </Col>
+                                {/* </div> */}
                             </Row>
                         )
                     })}
