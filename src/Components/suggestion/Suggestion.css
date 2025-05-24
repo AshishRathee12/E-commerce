@@ -1,0 +1,40 @@
+.suggestion-name{
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.suggestion-name:hover {
+    cursor: pointer;
+}
+
+.suggestion-container:hover .suggestion-dropdown-icons {
+    rotate: 180deg;
+}
+
+.suggestion-row {
+    position: relative;
+}
+
+.suggestion-display {
+    position: absolute;
+    background-color: #fff;
+    top: 70%;
+    right: 0%;
+    left: 0%;
+    z-index: 99;
+}
+
+.suggestion-display li {
+    list-style: none;
+    font-size: 14px;
+    color: grey;
+    cursor: pointer;
+}
+.suggestion-display a{
+    text-decoration: none;
+}
+
+.suggestion-display li:hover {
+    color: #0053e2;
+}

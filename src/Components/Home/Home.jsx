@@ -1,0 +1,239 @@
+import React, { useEffect, useRef, useState } from 'react'
+import MostSelled from './Most-selled/MostSelled'
+import { Col, Container, Row } from 'react-bootstrap';
+import './Home.css'
+import { Link, NavLink } from 'react-router-dom';
+import axios from 'axios';
+import Loadinglist from '../Productlist/Loadinglist';
+import { IoMdInformationCircleOutline } from "react-icons/io";
+import { CiHeart } from "react-icons/ci";
+import { FaChevronLeft } from "react-icons/fa6";
+import { FaChevronRight } from "react-icons/fa";
+import { useDispatch } from 'react-redux';
+import { addItems } from '../Cart/Slice';
+import toast, { Toaster } from 'react-hot-toast';
+
+export default function Home() {
+
+    const [users, setUsers] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+
+    const scroll = useRef(null)
+
+
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            setError(null);
+
+            // Check if data exists in localStorage
+            const cachedProducts = localStorage.getItem('watch_products');
+            if (cachedProducts) {
+                setUsers(JSON.parse(cachedProducts));
+                setLoading(false);
+                return;
+            }
+
+            const url = `https://real-time-amazon-data.p.rapidapi.com/search?query=watch&page=1&country=IN&sort_by=RELEVANCE&product_condition=ALL&is_prime=false&deals_and_discounts=NONE`;
+            const options = {
+                headers: {
+                    'x-rapidapi-key': 'bd52f8d6a4msh8eb450807febe1bp1b3e5djsn175ae6c6f60b',
+                    'x-rapidapi-host': 'real-time-amazon-data.p.rapidapi.com'
+                }
+            };
+
+            try {
+                const response = await axios.get(url, options);
+                const responsedata = response.data.data.products.slice(0, 24);
+
+                // Cache data to localStorage
+                localStorage.setItem('watch_products', JSON.stringify(responsedata));
+
+                setUsers(responsedata);
+                setLoading(false);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                setError("Failed to fetch users");
+                setLoading(false);
+            }
+        };
+
+        fetchProducts();
+    }, []);
+
+
+    // Adding to cart 
+    const dispatch = useDispatch();
+
+    const addingToCart = (item) => {
+        
+        dispatch(addItems(item))
+        toast.success('Item added to cart.')
+    }
+
+
+
+    const scrolling = (scrollval) => {
+        scroll.current.scrollLeft += scrollval;
+    }
+
+
+    if (error) return <p>{error}</p>;
+
+    return (
+        <div className='Home'>
+            <div><Toaster
+                position="bottom-center"
+                reverseOrder={false}
+            /></div>
+            <MostSelled />
+            <Container fluid className='mt-4'>
+                <Row>
+                    <Col lg={3} md={5}>
+                        <div className="Home-col d-sm-flex d-md-block">
+                            <Col className='me-sm-3 me-md-0'>
+                                <Row className='mb-3'>
+                                    <div className="Home-colRow">
+                                        <div className="Home-petitems Home-images">
+                                            <Link to={"/product-list/Pet-items"} as={NavLink}>
+                                                <img src="../../../images/pets.jpg" className='img-fluid' alt="Pet food" />
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </Row>
+                            </Col>
+                            <Col>
+                                <Row>
+                                    <div className="Home-colRow">
+                                        <div className="Home-toysitems Home-images">
+                                            <Link to={"/product-list/Toys"} as={NavLink}>
+                                                <img src="../../../images/toys.jpg" className='img-fluid' alt="" />
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </Row>
+                            </Col>
+                        </div>
+                    </Col>
+                    <Col lg={6} md={7} className='mt-3 mt-sm-0'>
+                        <div className="Home-col">
+                            <Row className='mb-3'>
+                                <div className="Home-colRow">
+                                    <div className="Home-Clothing Home-images">
+                                        <Link to={"/product-list/Clothes"} as={NavLink}>
+                                            <img src="../../../images/clothing-2.jpg" className='img-fluid' alt="Pet food" />
+                                        </Link>
+                                    </div>
+                                </div>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <Row className='mb-3'>
+                                        <div className="Home-colRow">
+                                            <div className="Home-jwellery Home-images">
+                                                <Link to={"/product-list/Jwellery"} as={NavLink}>
+                                                    <img src="../../../images/jwellery.webp" className='img-fluid' alt="Pet food" />
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    </Row>
+                                </Col>
+                                <Col>
+                                    <Row className='mb-3'>
+                                        <div className="Home-colRow">
+                                            <div className="Home-Food Home-images">
+                                                <Link to={"/product-list/Food"} as={NavLink}>
+                                                    <img src="../../../images/Food.jpg" className='img-fluid' alt="Pet food" />
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    </Row>
+                                </Col>
+                            </Row>
+                        </div>
+                    </Col>
+                    <Col lg={3}>
+                        <div className="Home-col d-md-flex d-lg-block">
+                            <Col className='me-3'>
+                                <Row className='mb-3'>
+                                    <div className="Home-colRow">
+                                        <div className="Home-electronic">
+                                            <Link to={"/product-list/Electronic"} as={NavLink}>
+                                                <img src="../../../images/electronic-2.webp" className='img-fluid' alt="Electronic" />
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </Row>
+                            </Col>
+
+                            <Col>
+                                <Row>
+                                    <div className="Home-colRow">
+                                        <div className="Home-furniture">
+                                            <Link to={"/product-list/Furniture"} as={NavLink}>
+                                                <img src="../../../images/furniture.jpg" className='img-fluid' alt="Furniture" />
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </Row>
+                            </Col>
+                        </div>
+                    </Col>
+                </Row>
+                {loading ? <Loadinglist /> : <Row className=' position-relative mt-4' >
+                    <div className="view-more d-flex justify-content-between ">
+                        <h3>Watch ...</h3>
+                        <Link to='/product-list/watch' as={NavLink}>
+                            <p className=''>View More</p>
+                        </Link>
+                    </div>
+                    <div className="scroll-btn">
+                        <div className="left-btn" onClick={() => scrolling(-350)}><FaChevronLeft size={30} /></div>
+                        <div className="right-btn" onClick={() => scrolling(350)}><FaChevronRight size={30} /></div>
+                    </div>
+                    <div className="watch-head">
+
+                    </div>
+                    <div className="watch-scroll overflow-hidden d-flex flew-nowrap" ref={scroll}>
+                        {users.map(elem => (
+                            <Col key={elem.asin} md={2} sm={3} className='mb-3 position-relative overflow-hidden col-6'>
+                                <div className="productlist-items p-2">
+                                    {elem.is_amazon_choice && <div className='best-seller'>Meget Choice</div>}
+                                    <div className="add-to-cart position-absolute top-0" onClick={() => addingToCart(elem)}>
+                                        <CiHeart size={30} />
+                                    </div>
+                                    <div className="product-item-img">
+                                        <img src={elem.product_photo} className='img-fluid mx-auto d-block' alt="" />
+                                    </div>
+                                    <div className="about-product mt-1">
+                                        <div className="isPrime">{elem.is_prime && <><p className='m-0'>Sponsored<IoMdInformationCircleOutline className='me-1' /></p></>}</div>
+                                        <div className="product-item-title">
+                                            <p className='m-0'>{elem.product_title}</p>
+                                        </div>
+                                        <div className="product-item-price d-flex mt-1">
+                                            <p className='discount-price mz-1 m-0'>{elem.product_price}</p>
+                                            <p className='original-price m-0'>{elem.product_original_price}</p>
+                                        </div>
+
+                                        {/* {elem.product_badge && <div className="product-bedge">
+                                            <p>{elem.product_badge}</p>
+                                        </div>}
+                                        <div className="total-sales">
+                                            <p>{elem.sales_volume}</p>
+                                        </div>
+                                        <div className="delivery-time">
+                                            <p>{elem.delivery}</p>
+                                        </div> */}
+                                    </div>
+                                </div>
+                            </Col>
+                        ))}
+                    </div>
+                </Row>}
+
+            </Container>
+        </div>
+    )
+}

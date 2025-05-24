@@ -1,0 +1,110 @@
+ .Home-images,
+ .Home-jwellery {
+     overflow: hidden;
+     border-radius: 15px;
+     height: 250px;
+ }
+
+ .Home-images img,
+ .Home-furniture img,
+ .Home-electronic img {
+     width: 100%;
+     height: 100% !important;
+     object-fit: cover;
+ }
+
+ .Home-Clothing,
+ .Home-Food,
+ .Home-electronic,
+ .Home-furniture {
+     border-radius: 15px;
+     overflow: hidden;
+ }
+
+ .Home-toysitems img {
+     object-fit: fill;
+ }
+
+ .Home-electronic {
+     height: 180px;
+ }
+
+ .Home-furniture {
+     height: 320px;
+ }
+
+ .Home-colRow img {
+     transition: transform 0.3s ease-in-out;
+     /* Smooth transition */
+ }
+
+ .Home-colRow img:hover {
+     cursor: pointer;
+     transform: scale(1.05);
+     /* Zoom in by 20% */
+ }
+ 
+.watch-scroll img{
+    transition: 0.3s all ease-in;
+    /* overflow: hidden; */
+}
+.add-to-cart{
+    z-index: 10;
+    cursor: pointer;
+}
+
+.watch-scroll img:hover{
+    transform: scale(1.2);
+}
+
+.product-item-img{
+    overflow: hidden;
+}
+
+.scroll-btn {
+    position: absolute; /* or fixed if needed */
+    top: 30%;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.left-btn,
+.right-btn {
+    pointer-events: auto;
+    background: white;
+    border-radius: 50%;
+    padding: 8px;
+    cursor: pointer;
+}
+
+
+
+
+
+
+ @media (max-width:992px) {
+     .Home-furniture {
+         height: 182px;
+     }
+ }
+
+ @media (max-width:768px) {
+
+     .Home-images,
+     .Home-jwellery {
+         height: 200px;
+     }
+ }
+
+ @media (max-width:567px) {
+
+     .Home-images,
+     .Home-jwellery {
+         height: 170px;
+     }
+ }

@@ -1,0 +1,114 @@
+.navbar {
+    background-color: #0053e2;
+}
+
+.logo img {
+    height: 66px;
+    width: 70px;
+    cursor: pointer;
+}
+
+
+
+.nav-input {
+    background-color: #fff;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-input input {
+    width: 90%;
+    border-radius: 30px;
+    border: none;
+    outline: none;
+}
+
+.nav-input input::placeholder {
+    color: #0053e2;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+}
+
+.nav-input button {
+    border: none;
+    background-color: #0442ac;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+
+}
+
+.focused {
+    border: 2px solid black;
+}
+
+.user-location,
+.sign-in {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.deliver-address,
+.update-location {
+    line-height: 16px;
+}
+
+.update-location {
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.hamburger {
+    cursor: pointer;
+}
+
+.choose-language {
+    background-color: rgb(32, 54, 182);
+    border-radius: 30px;
+    color: #fff;
+}
+
+
+
+/* side bar  */
+.side-navbar {
+    width: 50%;
+    height: 100vh;
+    position: absolute;
+    top: 0%;
+    z-index: 99;
+    left: 0px;
+    background-color: #fff;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.side-logo img {
+    height: 50px;
+    width: 57px;
+}
+
+.side-sign-in-thumbnail {
+    background-color: #0053e2;
+    border-radius: 30px;
+    color: #fff;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+
+
+
+.nav-info:hover {
+    background-color: rgb(32, 54, 182);
+    border-radius: 30px;
+}
+
+
+@media (max-width:576px) {
+    .side-sign-in-thumbnail p, .purchase-head,.account-heading,.help-head, .user-address{
+        font-size:14px ;
+    }
+}

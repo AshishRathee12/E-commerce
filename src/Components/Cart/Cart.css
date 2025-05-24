@@ -1,0 +1,15 @@
+.empty-cart{
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+.empty-cart img{
+    max-width: 300px;
+}
+.empty-info{
+    font-size: 22px;
+}
+.redirect-empty-cart button{
+    padding: 8px 50px;
+    border: none;
+    background-color: #0053e2;
+    color: #fff;
+}
