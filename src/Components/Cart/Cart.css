@@ -67,6 +67,10 @@
     font-weight: 400;
 }
 
+.Remove-btn button:hover {
+    color: #0053e2;
+}
+
 .item-sales p {
     font-size: 15px;
     color: rgb(114, 113, 113);
@@ -102,17 +106,40 @@
 }
 
 .cart-items {
-    border-radius: 3px;
+    border-radius: 5px;
 }
 
 
 
 /* cart price  */
-
+.cart-total-price {
+    /* margin-right: 15px; */
+    position: sticky;
+    border-radius: 5px;
+    top: 0;
+}
 
 .cart-price-heading p {
     color: rgb(131, 128, 128);
     font-size: 18px;
     font-weight: 500;
     letter-spacing: 0.4px;
+}
+
+.discount-amount {
+    color: Green;
+    font-weight: 500;
+}
+
+.main-price {
+    font-size: 18px;
+    font-weight: 600;
+    border-top: 1px dotted lightblue;
+}
+
+.place-order button {
+    border: none;
+    padding: 8px 0px;
+    background-color: rgb(255, 192, 1);
+    border-radius: 20px;
 }
