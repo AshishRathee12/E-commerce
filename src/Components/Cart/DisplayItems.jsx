@@ -2,10 +2,14 @@ import React, { useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap';
 import { FaMinus } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa6";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom'
+import { CleanCart, removeItem } from './Slice';
+
 const DisplayItems = () => {
 
     const todos = useSelector(state => state.Item);
+    const dispatch = useDispatch()
 
     const [item, setItem] = useState(1)
 
@@ -22,19 +26,28 @@ const DisplayItems = () => {
         }
     }
 
+    const removeFromCart = (res) => {
+        dispatch(removeItem(res))
+    }
+
+    const EmptyCart = () => {
+        dispatch(CleanCart())
+    }
 
     return (
         <Container className='mt-3'>
-            <Row>
-                <div className="clean-cart">
-                    <button>Empty cart</button>
-                </div>
-            </Row>
-            <Row>
-                <Col md={8} className='cart-detail py-3'>
+
+            <Row className='align-items-start'>
+                <Col md={8} className='cart-items'>
+                    <Row className='position-sticky top-0'>
+                        <div className="clean-cart p-2 d-flex justify-content-between align-items-center">
+                            <h3 className=' m-0'> Shopping Cart</h3>
+                            <button className='' onClick={EmptyCart}>Empty cart</button>
+                        </div>
+                    </Row>
                     {todos.map((items) => {
                         return (
-                            <Row key={items.asin}>
+                            <Row key={items.asin} className='p-3 mb-3'>
                                 {/* <div className='cart-item'> */}
                                 <Col md={2}>
                                     <div className="cart-image-detail d-flex flex-column align-items-center">
@@ -51,10 +64,12 @@ const DisplayItems = () => {
                                 <Col>
                                     <Col>
                                         <div className="cart-item-details">
-                                            <div className="item-title">{items.product_title}</div>
-                                            <div className="item-rate-details">
+                                            <Link >
+                                                <div className="item-title">{items.product_title}</div>
+                                            </Link>
+                                            <div className="item-rate-details mt-2">
                                                 <div className="item-price">{items.product_price}</div>
-                                                <div className="item-offer">{items.product_num_offers}</div>
+                                                <div className="item-offer">{items.product_num_offers} Offer Available</div>
                                             </div>
                                             <div className="item-sales">
                                                 <p>{items.sales_volume}</p>
@@ -63,11 +78,11 @@ const DisplayItems = () => {
                                     </Col>
                                     <Col>
                                         <div className="delivery">
-                                            <p>{items.
+                                            <p className='m-0'>{items.
                                                 delivery}</p>
                                         </div>
-                                        <div className="Remove-btn">
-                                            <p>Remove</p>
+                                        <div className="Remove-btn mt-2">
+                                            <button onClick={() => removeFromCart(items.asin)}>Remove</button>
                                         </div>
                                     </Col>
                                 </Col>
@@ -76,7 +91,13 @@ const DisplayItems = () => {
                         )
                     })}
                 </Col>
-                <Col></Col>
+                <Col className='cart-total-price'>
+                    <Row>
+                        <div className="cart-price-heading">
+                            <p>Price Details</p>
+                        </div>
+                    </Row>
+                </Col>
             </Row>
 
         </Container>

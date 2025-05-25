@@ -101,7 +101,7 @@ function Navbar() {
                   </div>
                 </div>
               </Col>
-              <Col md='3'>
+              <Col md='3' className='Cart-link d-flex justify-content-center align-items-center'>
                 <Link to='/Cart' as={NavLink}>
                   <Cart />
                 </Link>

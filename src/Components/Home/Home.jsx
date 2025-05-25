@@ -9,7 +9,7 @@ import { IoMdInformationCircleOutline } from "react-icons/io";
 import { CiHeart } from "react-icons/ci";
 import { FaChevronLeft } from "react-icons/fa6";
 import { FaChevronRight } from "react-icons/fa";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addItems } from '../Cart/Slice';
 import toast, { Toaster } from 'react-hot-toast';
 
@@ -22,6 +22,7 @@ export default function Home() {
 
     const scroll = useRef(null)
 
+    const reduxdata = useSelector(state => state.Item)
 
 
     useEffect(() => {
@@ -44,20 +45,20 @@ export default function Home() {
                 }
             };
 
-            try {
-                const response = await axios.get(url, options);
-                const responsedata = response.data.data.products.slice(0, 24);
+            // try {
+            //     const response = await axios.get(url, options);
+            //     const responsedata = response.data.data.products.slice(0, 24);
 
-                // Cache data to localStorage
-                localStorage.setItem('watch_products', JSON.stringify(responsedata));
+            //     // Cache data to localStorage
+            //     localStorage.setItem('watch_products', JSON.stringify(responsedata));
 
-                setUsers(responsedata);
-                setLoading(false);
-            } catch (error) {
-                console.error("Error fetching data:", error);
-                setError("Failed to fetch users");
-                setLoading(false);
-            }
+            //     setUsers(responsedata);
+            //     setLoading(false);
+            // } catch (error) {
+            //     console.error("Error fetching data:", error);
+            //     setError("Failed to fetch users");
+            //     setLoading(false);
+            // }
         };
 
         fetchProducts();
@@ -68,9 +69,12 @@ export default function Home() {
     const dispatch = useDispatch();
 
     const addingToCart = (item) => {
-        
-        dispatch(addItems(item))
-        toast.success('Item added to cart.')
+        const exists = reduxdata.some((elem) => elem.asin === item.asin);
+
+        if (!exists) {
+            dispatch(addItems(item))
+            toast.success('Item added to cart.')
+        }
     }
 
 

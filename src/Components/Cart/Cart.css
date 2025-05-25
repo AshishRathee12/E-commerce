@@ -1,4 +1,7 @@
-.empty-cart,.cart-detail {
+.empty-cart,
+.cart-items,
+.clean-cart,
+.cart-total-price {
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
 
@@ -16,6 +19,9 @@
     background-color: #0053e2;
     color: #fff;
 }
+
+
+/* cart details  */
 
 .cart-item-img img {
     max-width: 100px;
@@ -41,4 +47,72 @@
     justify-content: center;
     align-items: center;
     border-radius: 3px;
+}
+
+.item-offer {
+    color: green;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.item-price {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.Remove-btn button {
+    border: none;
+    background-color: transparent;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.item-sales p {
+    font-size: 15px;
+    color: rgb(114, 113, 113);
+}
+
+.clean-cart {
+    background-color: #fff;
+    border-radius: 3px;
+}
+
+.clean-cart button {
+    border: none;
+    background-color: #0053e2;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: 0.4s all ease;
+}
+
+.clean-cart button:hover {
+    box-shadow: inset 8px 8px 16px 0 rgba(0, 0, 0, 0.2),
+        inset -8px -8px 16px 0 rgba(255, 255, 255, 0.4);
+
+}
+
+.item-title {
+    color: black;
+}
+
+.cart-item-details a {
+    text-decoration: none;
+}
+
+.cart-items {
+    border-radius: 3px;
+}
+
+
+
+/* cart price  */
+
+
+.cart-price-heading p {
+    color: rgb(131, 128, 128);
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0.4px;
 }
