@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { Link, NavLink, useParams, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import { Button, Card, Col, Container, Row } from 'react-bootstrap';
 import './Productlist.css'
@@ -18,13 +18,13 @@ import toast, { Toaster } from 'react-hot-toast';
 export default function ProductList() {
     const { id } = useParams();
 
-    console.log("api called")
+    // console.log("api called")
 
     const [data, setData] = useState([]);
     const [visibleData, setVisibleData] = useState([])
     const [error, setError] = useState(null);
     const [hasMore, setHasMore] = useState(true);
-    const itemsPerPage = 8;
+    const itemsPerPage = 12;
     const [page, setPage] = useState(1)
 
     useEffect(() => {
@@ -104,7 +104,7 @@ export default function ProductList() {
 
     if (!error)
         return (
-            <Container>
+            <Container fluid='md'>
                 <div id='row'>
                     {/* {page} */}
                     <InfiniteScroll className='mt-4'
@@ -117,39 +117,42 @@ export default function ProductList() {
                     >
                         <Row>
                             {visibleData.map((elem) => {
-                                const title = elem.product_title.slice(0, 25)
+                                const title = elem.product_title.slice(0, 40)
                                 // console.log(title)
+                                const linked = '/Productdetail/' + elem.asin;
                                 return (
-                                    <Col key={elem.asin} md={2} className='mb-3 position-relative overflow-hidden'>
-                                        <div className="productlist-items p-2">
-                                            {elem.is_amazon_choice && <div className='best-seller'>Meget Choice</div>}
-                                            <div className="add-to-cart position-absolute top-0" onClick={addingToCart}>
-                                                <CiHeart size={30} />
-                                            </div>
-                                            <div className="product-item-img">
-                                                <img src={elem.product_photo} className='img-fluid mx-auto d-block' alt="" />
-                                            </div>
-                                            <div className="about-product mt-1">
-                                                <div className="isPrime">{elem.is_prime && <><p className='m-0'>Sponsored<IoMdInformationCircleOutline className='me-1' /></p></>}</div>
-                                                <div className="product-item-title">
-                                                    <p className='m-0'>{title}...</p>
+                                    <Col key={elem.asin} xl={2} lg={3} md={4} className='mb-3 position-relative overflow-hidden productlist-main col-6'>
+                                        <Link to={linked} as={NavLink}>
+                                            <div className="productlist-items p-2">
+                                                {elem.is_amazon_choice && <div className='best-seller'>Meget Choice</div>}
+                                                <div className="add-to-cart position-absolute top-0" onClick={addingToCart}>
+                                                    <CiHeart size={30} />
                                                 </div>
-                                                <div className="product-item-price d-flex mt-1">
-                                                    <p className='discount-price mz-1 m-0'>{elem.product_price}</p>
-                                                    <p className='original-price m-0'>{elem.product_original_price}</p>
+                                                <div className="product-item-img">
+                                                    <img src={elem.product_photo} className='img-fluid mx-auto d-block' alt="" />
                                                 </div>
+                                                <div className="about-product mt-1">
+                                                    <div className="isPrime">{elem.is_prime && <><p className='m-0'>Sponsored<IoMdInformationCircleOutline className='me-1' /></p></>}</div>
+                                                    <div className="product-item-title">
+                                                        <p className='m-0'>{title}...</p>
+                                                    </div>
+                                                    <div className="product-item-price d-flex mt-1">
+                                                        <p className='discount-price mz-1 m-0'>{elem.product_price}</p>
+                                                        <p className='original-price m-0'>{elem.product_original_price}</p>
+                                                    </div>
 
-                                                {elem.product_badge && <div className="product-bedge">
-                                                    <p>{elem.product_badge}</p>
-                                                </div>}
-                                                <div className="total-sales">
-                                                    <p>{elem.sales_volume}</p>
-                                                </div>
-                                                <div className="delivery-time">
-                                                    <p>{elem.delivery}</p>
+                                                    {elem.product_badge && <div className="product-bedge">
+                                                        <p>{elem.product_badge}</p>
+                                                    </div>}
+                                                    <div className="total-sales">
+                                                        <p>{elem.sales_volume}</p>
+                                                    </div>
+                                                    <div className="delivery-time">
+                                                        <p>{elem.delivery}</p>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </Link>
                                     </Col>
                                 )
                             })}

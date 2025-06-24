@@ -17,7 +17,7 @@ export default function Home() {
 
     const [watch, setWatch] = useState([]);
     const [cloth, setCloth] = useState([]);
-    
+
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -211,29 +211,29 @@ export default function Home() {
                     <div className="home-scroll overflow-hidden d-flex flew-nowrap" ref={scroll}>
                         {watch.map(elem => {
                             // const link=elem+'/Productlist'
-                           const title = elem.product_title.slice(0, 40)
+                            const title = elem.product_title.slice(0, 40)
                             return (
                                 <Col key={elem.asin} md={2} sm={3} className='mb-3 position-relative overflow-hidden col-6'>
                                     {/* <Link to={link} as={NavLink}> */}
-                                        <div className="productlist-items p-2">
-                                            {elem.is_amazon_choice && <div className='best-seller'>Meget Choice</div>}
-                                            <div className="add-to-cart position-absolute top-0" onClick={() => addingToCart(elem)}>
-                                                <CiHeart size={30} />
+                                    <div className="productlist-items p-2">
+                                        {elem.is_amazon_choice && <div className='best-seller'>Meget Choice</div>}
+                                        <div className="add-to-cart position-absolute top-0" onClick={() => addingToCart(elem)}>
+                                            <CiHeart size={30} />
+                                        </div>
+                                        <div className="product-item-img">
+                                            <img src={elem.product_photo} className='img-fluid mx-auto d-block' alt="" />
+                                        </div>
+                                        <div className="about-product mt-1">
+                                            <div className="isPrime">{elem.is_prime && <><p className='m-0'>Sponsored<IoMdInformationCircleOutline className='me-1' /></p></>}</div>
+                                            <div className="product-item-title">
+                                                <p className='m-0'>{title}...</p>
                                             </div>
-                                            <div className="product-item-img">
-                                                <img src={elem.product_photo} className='img-fluid mx-auto d-block' alt="" />
+                                            <div className="product-item-price d-flex mt-1">
+                                                <p className='discount-price mz-1 m-0'>{elem.product_price}</p>
+                                                <p className='original-price m-0'>{elem.product_original_price}</p>
                                             </div>
-                                            <div className="about-product mt-1">
-                                                <div className="isPrime">{elem.is_prime && <><p className='m-0'>Sponsored<IoMdInformationCircleOutline className='me-1' /></p></>}</div>
-                                                <div className="product-item-title">
-                                                    <p className='m-0'>{title}...</p>
-                                                </div>
-                                                <div className="product-item-price d-flex mt-1">
-                                                    <p className='discount-price mz-1 m-0'>{elem.product_price}</p>
-                                                    <p className='original-price m-0'>{elem.product_original_price}</p>
-                                                </div>
 
-                                                {/* {elem.product_badge && <div className="product-bedge">
+                                            {/* {elem.product_badge && <div className="product-bedge">
                                             <p>{elem.product_badge}</p>
                                         </div>}
                                         <div className="total-sales">
@@ -242,8 +242,8 @@ export default function Home() {
                                         <div className="delivery-time">
                                             <p>{elem.delivery}</p>
                                         </div> */}
-                                            </div>
                                         </div>
+                                    </div>
                                     {/* </Link> */}
                                 </Col>
                             )
@@ -253,7 +253,7 @@ export default function Home() {
                 {loading ? <Loadinglist /> : <Row className=' position-relative mt-4' >
                     <div className="view-more d-flex justify-content-between ">
                         <h3>Cloth ...</h3>
-                        <Link to='/product-list/watch' as={NavLink}>
+                        <Link to='/product-list/clothes' as={NavLink}>
                             <p className=''>View More</p>
                         </Link>
                     </div>
@@ -265,31 +265,31 @@ export default function Home() {
 
                     </div>
                     <div className="home-scroll overflow-hidden d-flex flew-nowrap" ref={scroll}>
-                      {cloth.map(elem => {
+                        {cloth.map(elem => {
                             // const link=elem+'/Productlist'
-                           const title = elem.product_title.slice(0, 40)
+                            const title = elem.product_title.slice(0, 40)
                             return (
                                 <Col key={elem.asin} md={2} sm={3} className='mb-3 position-relative overflow-hidden col-6'>
                                     {/* <Link to={link} as={NavLink}> */}
-                                        <div className="productlist-items p-2">
-                                            {elem.is_amazon_choice && <div className='best-seller'>Meget Choice</div>}
-                                            <div className="add-to-cart position-absolute top-0" onClick={() => addingToCart(elem)}>
-                                                <CiHeart size={30} />
+                                    <div className="productlist-items p-2">
+                                        {elem.is_amazon_choice && <div className='best-seller'>Meget Choice</div>}
+                                        <div className="add-to-cart position-absolute top-0" onClick={() => addingToCart(elem)}>
+                                            <CiHeart size={30} />
+                                        </div>
+                                        <div className="product-item-img">
+                                            <img src={elem.product_photo} className='img-fluid mx-auto d-block' alt="" />
+                                        </div>
+                                        <div className="about-product mt-1">
+                                            <div className="isPrime">{elem.is_prime && <><p className='m-0'>Sponsored<IoMdInformationCircleOutline className='me-1' /></p></>}</div>
+                                            <div className="product-item-title">
+                                                <p className='m-0'>{title}...</p>
                                             </div>
-                                            <div className="product-item-img">
-                                                <img src={elem.product_photo} className='img-fluid mx-auto d-block' alt="" />
+                                            <div className="product-item-price d-flex mt-1">
+                                                <p className='discount-price mz-1 m-0'>{elem.product_price}</p>
+                                                <p className='original-price m-0'>{elem.product_original_price}</p>
                                             </div>
-                                            <div className="about-product mt-1">
-                                                <div className="isPrime">{elem.is_prime && <><p className='m-0'>Sponsored<IoMdInformationCircleOutline className='me-1' /></p></>}</div>
-                                                <div className="product-item-title">
-                                                    <p className='m-0'>{title}...</p>
-                                                </div>
-                                                <div className="product-item-price d-flex mt-1">
-                                                    <p className='discount-price mz-1 m-0'>{elem.product_price}</p>
-                                                    <p className='original-price m-0'>{elem.product_original_price}</p>
-                                                </div>
 
-                                                {/* {elem.product_badge && <div className="product-bedge">
+                                            {/* {elem.product_badge && <div className="product-bedge">
                                             <p>{elem.product_badge}</p>
                                         </div>}
                                         <div className="total-sales">
@@ -298,8 +298,8 @@ export default function Home() {
                                         <div className="delivery-time">
                                             <p>{elem.delivery}</p>
                                         </div> */}
-                                            </div>
                                         </div>
+                                    </div>
                                     {/* </Link> */}
                                 </Col>
                             )

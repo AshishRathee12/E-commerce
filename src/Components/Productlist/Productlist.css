@@ -1,5 +1,6 @@
 .productlist-items img {
     height: 200px !important;
+    object-fit: contain;
 }
 
 .productlist-items {
@@ -7,9 +8,10 @@
     /* box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px; */
 }
 
-/* .product-item-title{
-    overflow:;
-} */
+.product-item-img {
+    /* background-color: grey; */
+}
+
 .discount-price {
     color: green;
     font-weight: 600;
@@ -67,12 +69,52 @@
     font-weight: 600;
 }
 
-.next-btn button{
+.next-btn button {
     height: 50px;
     width: 50px;
     border-radius: 50%;
 }
 
+.productlist-main a {
+    color: black;
+    text-decoration: none;
+}
+
+
+
+/* loader */
+
+/* From Uiverse.io by Fernando-sv */
+.loader {
+    border: 4px solid #0053e2;
+    border-left-color: transparent;
+    border-radius: 50%;
+}
+
+.loader {
+    border: 4px solid #0053e2;
+    border-left-color: transparent;
+    width: 36px;
+    height: 36px;
+}
+
+.loader {
+    border: 4px solid #0053e2;
+    border-left-color: transparent;
+    width: 36px;
+    height: 36px;
+    animation: spin89345 1s linear infinite;
+}
+
+@keyframes spin89345 {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
 
 
 
@@ -82,32 +124,30 @@
 
 
 .loading-content {
-  height: 300px;
-  background: linear-gradient(
-    90deg,
-    rgba(204, 202, 202, 0.25) 25%,
-    rgba(135, 134, 134, 0.292) 50%,
-    rgba(204, 202, 202, 0.25) 75%
-  );
-  background-size: 200% 100%;
-  background-repeat: repeat;
-  animation: slideIn 2s linear infinite;
+    height: 300px;
+    background: linear-gradient(90deg,
+            rgba(204, 202, 202, 0.25) 25%,
+            rgba(135, 134, 134, 0.292) 50%,
+            rgba(204, 202, 202, 0.25) 75%);
+    background-size: 200% 100%;
+    background-repeat: repeat;
+    animation: slideIn 2s linear infinite;
 }
 
 @keyframes slideIn {
-  0% {
-    background-position: 0% 0;
-  }
-  100% {
-    background-position: 100% 0;
-  }
+    0% {
+        background-position: 0% 0;
+    }
+
+    100% {
+        background-position: 100% 0;
+    }
 }
 
 
 
 @media (max-width:768px) {
-    .loading-content{
+    .loading-content {
         height: 200px;
     }
 }
-
