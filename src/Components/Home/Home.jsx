@@ -15,7 +15,9 @@ import toast, { Toaster } from 'react-hot-toast';
 
 export default function Home() {
 
-    const [users, setUsers] = useState([]);
+    const [watch, setWatch] = useState([]);
+    const [cloth, setCloth] = useState([]);
+    
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -28,16 +30,21 @@ export default function Home() {
     useEffect(() => {
         const fetchProducts = async () => {
             setError(null);
-
             // Check if data exists in localStorage
             const cachedProducts = localStorage.getItem('watch_products');
+            const cachedProducts2 = localStorage.getItem('clothing_products');
             if (cachedProducts) {
-                setUsers(JSON.parse(cachedProducts));
+                setWatch(JSON.parse(cachedProducts));
+                setLoading(false);
+                // return;
+            }
+            if (cachedProducts2) {
+                setCloth(JSON.parse(cachedProducts2));
                 setLoading(false);
                 return;
             }
 
-            const url = `https://real-time-amazon-data.p.rapidapi.com/search?query=watch&page=1&country=IN&sort_by=RELEVANCE&product_condition=ALL&is_prime=false&deals_and_discounts=NONE`;
+            const url = `https://real-time-amazon-data.p.rapidapi.com/search?query=clothing&page=1&country=IN&sort_by=RELEVANCE&product_condition=ALL&is_prime=false&deals_and_discounts=NONE`;
             const options = {
                 headers: {
                     'x-rapidapi-key': 'bd52f8d6a4msh8eb450807febe1bp1b3e5djsn175ae6c6f60b',
@@ -51,6 +58,7 @@ export default function Home() {
 
             //     // Cache data to localStorage
             //     localStorage.setItem('watch_products', JSON.stringify(responsedata));
+            //     localStorage.setItem('clothing_products', JSON.stringify(responsedata));
 
             //     setUsers(responsedata);
             //     setLoading(false);
@@ -200,28 +208,32 @@ export default function Home() {
                     <div className="watch-head">
 
                     </div>
-                    <div className="watch-scroll overflow-hidden d-flex flew-nowrap" ref={scroll}>
-                        {users.map(elem => (
-                            <Col key={elem.asin} md={2} sm={3} className='mb-3 position-relative overflow-hidden col-6'>
-                                <div className="productlist-items p-2">
-                                    {elem.is_amazon_choice && <div className='best-seller'>Meget Choice</div>}
-                                    <div className="add-to-cart position-absolute top-0" onClick={() => addingToCart(elem)}>
-                                        <CiHeart size={30} />
-                                    </div>
-                                    <div className="product-item-img">
-                                        <img src={elem.product_photo} className='img-fluid mx-auto d-block' alt="" />
-                                    </div>
-                                    <div className="about-product mt-1">
-                                        <div className="isPrime">{elem.is_prime && <><p className='m-0'>Sponsored<IoMdInformationCircleOutline className='me-1' /></p></>}</div>
-                                        <div className="product-item-title">
-                                            <p className='m-0'>{elem.product_title}</p>
-                                        </div>
-                                        <div className="product-item-price d-flex mt-1">
-                                            <p className='discount-price mz-1 m-0'>{elem.product_price}</p>
-                                            <p className='original-price m-0'>{elem.product_original_price}</p>
-                                        </div>
+                    <div className="home-scroll overflow-hidden d-flex flew-nowrap" ref={scroll}>
+                        {watch.map(elem => {
+                            // const link=elem+'/Productlist'
+                           const title = elem.product_title.slice(0, 40)
+                            return (
+                                <Col key={elem.asin} md={2} sm={3} className='mb-3 position-relative overflow-hidden col-6'>
+                                    {/* <Link to={link} as={NavLink}> */}
+                                        <div className="productlist-items p-2">
+                                            {elem.is_amazon_choice && <div className='best-seller'>Meget Choice</div>}
+                                            <div className="add-to-cart position-absolute top-0" onClick={() => addingToCart(elem)}>
+                                                <CiHeart size={30} />
+                                            </div>
+                                            <div className="product-item-img">
+                                                <img src={elem.product_photo} className='img-fluid mx-auto d-block' alt="" />
+                                            </div>
+                                            <div className="about-product mt-1">
+                                                <div className="isPrime">{elem.is_prime && <><p className='m-0'>Sponsored<IoMdInformationCircleOutline className='me-1' /></p></>}</div>
+                                                <div className="product-item-title">
+                                                    <p className='m-0'>{title}...</p>
+                                                </div>
+                                                <div className="product-item-price d-flex mt-1">
+                                                    <p className='discount-price mz-1 m-0'>{elem.product_price}</p>
+                                                    <p className='original-price m-0'>{elem.product_original_price}</p>
+                                                </div>
 
-                                        {/* {elem.product_badge && <div className="product-bedge">
+                                                {/* {elem.product_badge && <div className="product-bedge">
                                             <p>{elem.product_badge}</p>
                                         </div>}
                                         <div className="total-sales">
@@ -230,10 +242,68 @@ export default function Home() {
                                         <div className="delivery-time">
                                             <p>{elem.delivery}</p>
                                         </div> */}
-                                    </div>
-                                </div>
-                            </Col>
-                        ))}
+                                            </div>
+                                        </div>
+                                    {/* </Link> */}
+                                </Col>
+                            )
+                        })}
+                    </div>
+                </Row>}
+                {loading ? <Loadinglist /> : <Row className=' position-relative mt-4' >
+                    <div className="view-more d-flex justify-content-between ">
+                        <h3>Cloth ...</h3>
+                        <Link to='/product-list/watch' as={NavLink}>
+                            <p className=''>View More</p>
+                        </Link>
+                    </div>
+                    <div className="scroll-btn">
+                        <div className="left-btn" onClick={() => scrolling(-350)}><FaChevronLeft size={30} /></div>
+                        <div className="right-btn" onClick={() => scrolling(350)}><FaChevronRight size={30} /></div>
+                    </div>
+                    <div className="watch-head">
+
+                    </div>
+                    <div className="home-scroll overflow-hidden d-flex flew-nowrap" ref={scroll}>
+                      {cloth.map(elem => {
+                            // const link=elem+'/Productlist'
+                           const title = elem.product_title.slice(0, 40)
+                            return (
+                                <Col key={elem.asin} md={2} sm={3} className='mb-3 position-relative overflow-hidden col-6'>
+                                    {/* <Link to={link} as={NavLink}> */}
+                                        <div className="productlist-items p-2">
+                                            {elem.is_amazon_choice && <div className='best-seller'>Meget Choice</div>}
+                                            <div className="add-to-cart position-absolute top-0" onClick={() => addingToCart(elem)}>
+                                                <CiHeart size={30} />
+                                            </div>
+                                            <div className="product-item-img">
+                                                <img src={elem.product_photo} className='img-fluid mx-auto d-block' alt="" />
+                                            </div>
+                                            <div className="about-product mt-1">
+                                                <div className="isPrime">{elem.is_prime && <><p className='m-0'>Sponsored<IoMdInformationCircleOutline className='me-1' /></p></>}</div>
+                                                <div className="product-item-title">
+                                                    <p className='m-0'>{title}...</p>
+                                                </div>
+                                                <div className="product-item-price d-flex mt-1">
+                                                    <p className='discount-price mz-1 m-0'>{elem.product_price}</p>
+                                                    <p className='original-price m-0'>{elem.product_original_price}</p>
+                                                </div>
+
+                                                {/* {elem.product_badge && <div className="product-bedge">
+                                            <p>{elem.product_badge}</p>
+                                        </div>}
+                                        <div className="total-sales">
+                                            <p>{elem.sales_volume}</p>
+                                        </div>
+                                        <div className="delivery-time">
+                                            <p>{elem.delivery}</p>
+                                        </div> */}
+                                            </div>
+                                        </div>
+                                    {/* </Link> */}
+                                </Col>
+                            )
+                        })}
                     </div>
                 </Row>}
 

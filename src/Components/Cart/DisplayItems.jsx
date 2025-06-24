@@ -29,6 +29,7 @@ const DisplayItems = () => {
                 const cleanedOriginal = curr.product_original_price?.replace(/[₹,]/g, '');
                 const original = parseInt(cleanedOriginal) || 0;
 
+
                 const cleanedPaid = curr.product_price?.replace(/[₹,]/g, '');
                 const paid = parseInt(cleanedPaid) || 0;
 
@@ -47,7 +48,7 @@ const DisplayItems = () => {
     //  Call it inside useEffect
     useEffect(() => {
         const total = calculateTotal();
-        console.log("Total:", total);
+        // console.log("Total:", total);
         setAmout(total.totalOriginal)
         setDisplayAmount(total.totalPaid)
         setOffer(total.totalOriginal - total.totalPaid)

@@ -44,7 +44,7 @@
      /* Zoom in by 20% */
  }
  
-.watch-scroll img{
+.home-scroll img{
     transition: 0.3s all ease-in;
     /* overflow: hidden; */
 }
@@ -53,7 +53,7 @@
     cursor: pointer;
 }
 
-.watch-scroll img:hover{
+.home-scroll img:hover{
     transform: scale(1.2);
 }
 

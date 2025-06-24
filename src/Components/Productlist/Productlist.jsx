@@ -116,39 +116,43 @@ export default function ProductList() {
                         style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', overflow: "hidden" }}
                     >
                         <Row>
-                            {visibleData.map((elem) => (
-                                <Col key={elem.asin} md={3} className='mb-3 position-relative overflow-hidden'>
-                                    <div className="productlist-items p-2">
-                                        {elem.is_amazon_choice && <div className='best-seller'>Meget Choice</div>}
-                                        <div className="add-to-cart position-absolute top-0" onClick={addingToCart}>
-                                            <CiHeart size={30} />
-                                        </div>
-                                        <div className="product-item-img">
-                                            <img src={elem.product_photo} className='img-fluid mx-auto d-block' alt="" />
-                                        </div>
-                                        <div className="about-product mt-1">
-                                            <div className="isPrime">{elem.is_prime && <><p className='m-0'>Sponsored<IoMdInformationCircleOutline className='me-1' /></p></>}</div>
-                                            <div className="product-item-title">
-                                                <p className='m-0'>{elem.product_title}</p>
-                                            </div>\
-                                            <div className="product-item-price d-flex mt-1">
-                                                <p className='discount-price mz-1 m-0'>{elem.product_price}</p>
-                                                <p className='original-price m-0'>{elem.product_original_price}</p>
+                            {visibleData.map((elem) => {
+                                const title = elem.product_title.slice(0, 25)
+                                // console.log(title)
+                                return (
+                                    <Col key={elem.asin} md={2} className='mb-3 position-relative overflow-hidden'>
+                                        <div className="productlist-items p-2">
+                                            {elem.is_amazon_choice && <div className='best-seller'>Meget Choice</div>}
+                                            <div className="add-to-cart position-absolute top-0" onClick={addingToCart}>
+                                                <CiHeart size={30} />
                                             </div>
+                                            <div className="product-item-img">
+                                                <img src={elem.product_photo} className='img-fluid mx-auto d-block' alt="" />
+                                            </div>
+                                            <div className="about-product mt-1">
+                                                <div className="isPrime">{elem.is_prime && <><p className='m-0'>Sponsored<IoMdInformationCircleOutline className='me-1' /></p></>}</div>
+                                                <div className="product-item-title">
+                                                    <p className='m-0'>{title}...</p>
+                                                </div>
+                                                <div className="product-item-price d-flex mt-1">
+                                                    <p className='discount-price mz-1 m-0'>{elem.product_price}</p>
+                                                    <p className='original-price m-0'>{elem.product_original_price}</p>
+                                                </div>
 
-                                            {elem.product_badge && <div className="product-bedge">
-                                                <p>{elem.product_badge}</p>
-                                            </div>}
-                                            <div className="total-sales">
-                                                <p>{elem.sales_volume}</p>
-                                            </div>
-                                            <div className="delivery-time">
-                                                <p>{elem.delivery}</p>
+                                                {elem.product_badge && <div className="product-bedge">
+                                                    <p>{elem.product_badge}</p>
+                                                </div>}
+                                                <div className="total-sales">
+                                                    <p>{elem.sales_volume}</p>
+                                                </div>
+                                                <div className="delivery-time">
+                                                    <p>{elem.delivery}</p>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </Col>
-                            ))}
+                                    </Col>
+                                )
+                            })}
                         </Row>
                     </InfiniteScroll>
                 </div>
