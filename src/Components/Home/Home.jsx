@@ -73,6 +73,10 @@ export default function Home() {
     }, []);
 
 
+    useEffect(() => {
+        document.title = "Online shopping site in india";
+    }, []);
+
     // Adding to cart 
     const dispatch = useDispatch();
 

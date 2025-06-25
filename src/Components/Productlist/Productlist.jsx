@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, NavLink, useParams, useSearchParams } from 'react-router-dom';
+import { Link, NavLink, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import { Button, Card, Col, Container, Row } from 'react-bootstrap';
 import './Productlist.css'
@@ -17,7 +17,7 @@ import toast, { Toaster } from 'react-hot-toast';
 
 export default function ProductList() {
     const { id } = useParams();
-
+    const navigate = useNavigate()
     // console.log("api called")
 
     const [data, setData] = useState([]);
@@ -62,6 +62,11 @@ export default function ProductList() {
 
     }, [id, page]);
 
+    useEffect(() => {
+        if (visibleData.length == 0) {
+        navigate('/NotFound')
+        }
+    }, [visibleData])
 
     const fetchMoreData = () => {
         // console.log("fetch called")
@@ -91,12 +96,14 @@ export default function ProductList() {
 
     // adding to Cart
 
-    const addingToCart = (item) => {
+    const addingToCart = (e, item) => {
         useDispatch(addItems(item))
         toast.success('Item added to cart.')
     }
 
-
+    useEffect(() => {
+        document.title = `Meget.in : ${id}`;
+    }, []);
 
 
 
@@ -122,12 +129,12 @@ export default function ProductList() {
                                 const linked = '/Productdetail/' + elem.asin;
                                 return (
                                     <Col key={elem.asin} xl={2} lg={3} md={4} className='mb-3 position-relative overflow-hidden productlist-main col-6'>
-                                        <Link to={linked} as={NavLink}>
-                                            <div className="productlist-items p-2">
-                                                {elem.is_amazon_choice && <div className='best-seller'>Meget Choice</div>}
-                                                <div className="add-to-cart position-absolute top-0" onClick={addingToCart}>
-                                                    <CiHeart size={30} />
-                                                </div>
+                                        <div className="productlist-items p-2">
+                                            {elem.is_amazon_choice && <div className='best-seller'>Meget Choice</div>}
+                                            <div className="add-to-cart position-absolute top-0" onClick={addingToCart}>
+                                                <CiHeart size={30} />
+                                            </div>
+                                            <Link to={linked} as={NavLink}>
                                                 <div className="product-item-img">
                                                     <img src={elem.product_photo} className='img-fluid mx-auto d-block' alt="" />
                                                 </div>
@@ -151,15 +158,15 @@ export default function ProductList() {
                                                         <p>{elem.delivery}</p>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </Link>
+                                            </Link>
+                                        </div>
                                     </Col>
                                 )
                             })}
                         </Row>
                     </InfiniteScroll>
                 </div>
-            </Container>
+            </Container >
         )
 
 
