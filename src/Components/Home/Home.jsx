@@ -22,7 +22,8 @@ export default function Home() {
     const [error, setError] = useState(null);
 
 
-    const scroll = useRef(null)
+    const scrollWatch = useRef(null)
+    const scrollCloth = useRef(null)
 
     const reduxdata = useSelector(state => state.Item)
 
@@ -91,8 +92,11 @@ export default function Home() {
 
 
 
-    const scrolling = (scrollval) => {
-        scroll.current.scrollLeft += scrollval;
+    const scrollingCloth = (scrollval) => {
+        scrollCloth.current.scrollLeft += scrollval;
+    }
+    const scrollingWatch = (scrollval) => {
+        scrollWatch.current.scrollLeft += scrollval;
     }
 
 
@@ -206,13 +210,13 @@ export default function Home() {
                         </Link>
                     </div>
                     <div className="scroll-btn">
-                        <div className="left-btn" onClick={() => scrolling(-350)}><FaChevronLeft size={30} /></div>
-                        <div className="right-btn" onClick={() => scrolling(350)}><FaChevronRight size={30} /></div>
+                        <div className="left-btn" onClick={() => scrollingWatch(-350)}><FaChevronLeft size={30} /></div>
+                        <div className="right-btn" onClick={() => scrollingWatch(350)}><FaChevronRight size={30} /></div>
                     </div>
                     <div className="watch-head">
 
                     </div>
-                    <div className="home-scroll overflow-hidden d-flex flew-nowrap" ref={scroll}>
+                    <div className="home-scroll overflow-hidden d-flex flew-nowrap" ref={scrollWatch}>
                         {watch.map(elem => {
                             // const link=elem+'/Productlist'
                             const title = elem.product_title.slice(0, 40)
@@ -262,13 +266,13 @@ export default function Home() {
                         </Link>
                     </div>
                     <div className="scroll-btn">
-                        <div className="left-btn" onClick={() => scrolling(-350)}><FaChevronLeft size={30} /></div>
-                        <div className="right-btn" onClick={() => scrolling(350)}><FaChevronRight size={30} /></div>
+                        <div className="left-btn" onClick={() => scrollingCloth(-350)}><FaChevronLeft size={30} /></div>
+                        <div className="right-btn" onClick={() => scrollingCloth(350)}><FaChevronRight size={30} /></div>
                     </div>
                     <div className="watch-head">
 
                     </div>
-                    <div className="home-scroll overflow-hidden d-flex flew-nowrap" ref={scroll}>
+                    <div className="home-scroll overflow-hidden d-flex flew-nowrap" ref={scrollCloth}>
                         {cloth.map(elem => {
                             // const link=elem+'/Productlist'
                             const title = elem.product_title.slice(0, 40)

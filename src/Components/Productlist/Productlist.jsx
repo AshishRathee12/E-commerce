@@ -50,6 +50,10 @@ export default function ProductList() {
                 console.log((res.data.data.products))
                 setData(res.data.data.products);
                 setVisibleData(res.data.data.products.slice(0, itemsPerPage));
+                if (res.data.data.products.length == 0) {
+                    console.log(data)
+                    navigate('/NotFound')
+                }
             } catch (err) {
                 console.error("Fetch error:", err);
                 setError(err);
@@ -62,11 +66,7 @@ export default function ProductList() {
 
     }, [id, page]);
 
-    useEffect(() => {
-        if (visibleData.length == 0) {
-        navigate('/NotFound')
-        }
-    }, [visibleData])
+
 
     const fetchMoreData = () => {
         // console.log("fetch called")

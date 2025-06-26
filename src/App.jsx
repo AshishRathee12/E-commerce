@@ -17,7 +17,7 @@ const App = createBrowserRouter(
       <Route path='/product-list/:id' element={<Productlist />} ></Route>
       <Route path='/Cart' element={<AddCart />}></Route>
       <Route path="/Notfound" element={<Notfound />} />
-      <Route path='/productdetail/:id' element={<Productdetail />}></Route>
+      <Route path='/Productdetail/:id' element={<Productdetail />}></Route>
       {/* <Route path='*' element={<Error />}></Route> */}
     </Route >
     // {/* </Suspense> */}
