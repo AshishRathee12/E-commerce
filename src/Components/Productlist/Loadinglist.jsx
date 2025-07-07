@@ -68,7 +68,7 @@ export default function Loadinglist() {
 
                 {/* <!-- From Uiverse.io by Fernando-sv --> */}
             </Row>
-            <div class="loader mx-auto mt-3"></div>
+            <div className="loader mx-auto mt-3"></div>
         </Container>
     )
 }

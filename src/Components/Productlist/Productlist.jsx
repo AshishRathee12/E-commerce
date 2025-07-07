@@ -10,7 +10,7 @@ import Loadinglist from './Loadinglist';
 import { IoMdInformationCircleOutline } from "react-icons/io";
 import { CiHeart } from "react-icons/ci";
 import NextButton from './NextButton';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addItems } from '../Cart/Slice';
 import toast, { Toaster } from 'react-hot-toast';
 
@@ -19,13 +19,15 @@ export default function ProductList() {
     const { id } = useParams();
     const navigate = useNavigate()
     // console.log("api called")
-
+    const dispatch = useDispatch()
     const [data, setData] = useState([]);
     const [visibleData, setVisibleData] = useState([])
     const [error, setError] = useState(null);
     const [hasMore, setHasMore] = useState(true);
     const itemsPerPage = 12;
-    const [page, setPage] = useState(1)
+    const [page, setPage] = useState(1);
+
+    const selector = useSelector(state => state.Item);
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -38,16 +40,16 @@ export default function ProductList() {
                     // ashish rathee 
                     // 'x-rapidapi-key': 'ba5add63eamsh923b36e54af893ep14f893jsn0aaa91cf53f9',
                     // rathee ashish 
-                    // 'x-rapidapi-key': '65585d9e15mshd5c370d9d7ed9b9p1dd305jsn98f4ca42270f',
+                    'x-rapidapi-key': '65585d9e15mshd5c370d9d7ed9b9p1dd305jsn98f4ca42270f',
                     // 'x-rapidapi-host': 'real-time-amazon-data.p.rapidapi.com'
                     // disha 
-                    'x-rapidapi-key': 'bd52f8d6a4msh8eb450807febe1bp1b3e5djsn175ae6c6f60b',
+                    // 'x-rapidapi-key': 'bd52f8d6a4msh8eb450807febe1bp1b3e5djsn175ae6c6f60b',
                     'x-rapidapi-host': 'real-time-amazon-data.p.rapidapi.com'
                 }
             };
             try {
                 const res = await axios.get(url, options);
-                console.log((res.data.data.products))
+                // console.log((res.data.data.products))
                 setData(res.data.data.products);
                 setVisibleData(res.data.data.products.slice(0, itemsPerPage));
                 if (res.data.data.products.length == 0) {
@@ -96,9 +98,16 @@ export default function ProductList() {
 
     // adding to Cart
 
-    const addingToCart = (e, item) => {
-        useDispatch(addItems(item))
+    const addingToCart = (elem) => {
+        // console.log(selector)
+        // console.log(elem)
+        const check = selector.some((elem2) => elem2.asin === elem.asin)
+        if (check) {
+            return
+        }
+        dispatch(addItems(elem))
         toast.success('Item added to cart.')
+
     }
 
     useEffect(() => {
@@ -125,20 +134,20 @@ export default function ProductList() {
                         <Row>
                             {visibleData.map((elem) => {
                                 const title = elem.product_title.slice(0, 40)
-                                // console.log(title)
-                                const linked = '/Productdetail/' + elem.asin;
+                                // console.log(elem)
+                                const linked = "/Productdetail/" + elem.asin;
                                 return (
-                                    <Col key={elem.asin} xl={2} lg={3} md={4} className='mb-3 position-relative overflow-hidden productlist-main col-6'>
+                                    <Col key={elem.asin} lg={3} md={4} className='mb-3 position-relative overflow-hidden productlist-main col-6'>
                                         <div className="productlist-items p-2">
                                             {elem.is_amazon_choice && <div className='best-seller'>Meget Choice</div>}
-                                            <div className="add-to-cart position-absolute top-0" onClick={addingToCart}>
+                                            <div className="add-to-cart position-absolute top-0" onClick={() => addingToCart(elem)}>
                                                 <CiHeart size={30} />
                                             </div>
                                             <Link to={linked} as={NavLink}>
                                                 <div className="product-item-img">
-                                                    <img src={elem.product_photo} className='img-fluid mx-auto d-block' alt="" />
+                                                    <img src={elem.product_photo} className='img-fluid mx-auto d-block' alt="" loading='lazy' />
                                                 </div>
-                                                <div className="about-product mt-1">
+                                                <div className="about-product mt-2">
                                                     <div className="isPrime">{elem.is_prime && <><p className='m-0'>Sponsored<IoMdInformationCircleOutline className='me-1' /></p></>}</div>
                                                     <div className="product-item-title">
                                                         <p className='m-0'>{title}...</p>

@@ -13,7 +13,7 @@
 .rating-stars {
     border-radius: 5px;
     font-size: 14px;
-    padding: 5px 7px;
+    padding: 1px 5px;
 }
 
 .start-icon {
@@ -30,3 +30,146 @@
     justify-content: center;
     align-items: center;
 }
+
+.paying-price p {
+    font-size: 25px;
+    font-weight: 500;
+
+}
+
+.product_original_price p {
+    color: grey;
+}
+
+.price-off p {
+    color: green;
+    font-weight: 500;
+}
+
+.product-primary-date {
+    font-size: 15px;
+}
+
+.product-details li {
+    list-style: none;
+}
+
+.detail-key {
+    font-weight: 500;
+
+}
+
+.Add-to-cart button {
+    background-color: #3ab1c8;
+    display: flex;
+    font-size: 18px;
+    font-weight: 500;
+    border: none;
+    padding: 7px 11px;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+}
+
+.buy-now button {
+    background: #c2faf1;
+    display: flex;
+    font-size: 18px;
+    font-weight: 600;
+    border: none;
+    padding: 10px 11px;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+}
+
+.product-detail-more {
+    cursor: pointer;
+}
+
+.img-magnify img {
+    border: 1px solid rgba(211, 211, 211, 0.514);
+}
+
+.product-ratings {
+    border: 1px solid rgba(211, 211, 211, 0.514);
+
+}
+
+.rating-title p {
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.rate-product button {
+    border: none;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    padding: 10px 20px;
+    background-color: #fff;
+}
+
+.meter-green::-webkit-meter-optimum-value {
+    background: green;
+}
+
+.meter-orange::-webkit-meter-optimum-value {
+    background: rgb(248, 79, 6);
+}
+
+.meter-red::-webkit-meter-optimum-value {
+    background: rgb(194, 45, 45);
+}
+
+meter {
+    width: 140px;
+    height: 13px;
+}
+
+.product-stars {
+    font-size: 35px;
+}
+
+.product-rating-number {
+    color: grey;
+    font-size: 15px;
+}
+
+.product-rating-main {
+    border-bottom: 1px solid rgba(128, 128, 128, 0.277);
+}
+
+.product-review-individual {
+    border-bottom: 1px solid rgba(128, 128, 128, 0.277);
+}
+.review-stars{
+border-radius: 6px;
+padding: 2px 4px;
+}
+.review_title{
+    font-size: 14px;
+    font-weight: 500;
+}
+.review-images img{
+    height: 80px;
+    width: 80px;
+    margin-right: 5px;
+    object-fit: cover;
+}
+.review-author{
+    color: grey;
+    font-weight: 500;
+    font-size: 15px;
+}
+.next-review-page{
+    cursor: pointer;
+}
+
+.product-variations img{
+    object-fit: cover;
+    height: 100% !important;
+}
+.variation-heading p{
+    font-size: 20px;
+    font-weight: 500;
+}
+

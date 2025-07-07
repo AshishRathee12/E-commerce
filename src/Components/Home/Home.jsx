@@ -48,7 +48,16 @@ export default function Home() {
             const url = `https://real-time-amazon-data.p.rapidapi.com/search?query=clothing&page=1&country=IN&sort_by=RELEVANCE&product_condition=ALL&is_prime=false&deals_and_discounts=NONE`;
             const options = {
                 headers: {
-                    'x-rapidapi-key': 'bd52f8d6a4msh8eb450807febe1bp1b3e5djsn175ae6c6f60b',
+                    // disha 
+                    // 'x-rapidapi-key': 'bd52f8d6a4msh8eb450807febe1bp1b3e5djsn175ae6c6f60b',
+
+                    // ashish rathee 
+                    // 'x-rapidapi-key': 'ba5add63eamsh923b36e54af893ep14f893jsn0aaa91cf53f9',
+
+                    // rathee ashish 
+                    'x-rapidapi-key': '65585d9e15mshd5c370d9d7ed9b9p1dd305jsn98f4ca42270f',
+
+
                     'x-rapidapi-host': 'real-time-amazon-data.p.rapidapi.com'
                 }
             };
@@ -58,10 +67,11 @@ export default function Home() {
             //     const responsedata = response.data.data.products.slice(0, 24);
 
             //     // Cache data to localStorage
-            //     localStorage.setItem('watch_products', JSON.stringify(responsedata));
+            //     // localStorage.setItem('watch_products', JSON.stringify(responsedata));
             //     localStorage.setItem('clothing_products', JSON.stringify(responsedata));
 
-            //     setUsers(responsedata);
+            //     // setWatch(responsedata);
+            //     setCloth(responsedata);
             //     setLoading(false);
             // } catch (error) {
             //     console.error("Error fetching data:", error);
@@ -218,30 +228,30 @@ export default function Home() {
                     </div>
                     <div className="home-scroll overflow-hidden d-flex flew-nowrap" ref={scrollWatch}>
                         {watch.map(elem => {
-                            // const link=elem+'/Productlist'
+                            const link = '/Productdetail/' + elem.asin;
                             const title = elem.product_title.slice(0, 40)
                             return (
                                 <Col key={elem.asin} md={2} sm={3} className='mb-3 position-relative overflow-hidden col-6'>
-                                    {/* <Link to={link} as={NavLink}> */}
-                                    <div className="productlist-items p-2">
-                                        {elem.is_amazon_choice && <div className='best-seller'>Meget Choice</div>}
-                                        <div className="add-to-cart position-absolute top-0" onClick={() => addingToCart(elem)}>
-                                            <CiHeart size={30} />
-                                        </div>
-                                        <div className="product-item-img">
-                                            <img src={elem.product_photo} className='img-fluid mx-auto d-block' alt="" />
-                                        </div>
-                                        <div className="about-product mt-1">
-                                            <div className="isPrime">{elem.is_prime && <><p className='m-0'>Sponsored<IoMdInformationCircleOutline className='me-1' /></p></>}</div>
-                                            <div className="product-item-title">
-                                                <p className='m-0'>{title}...</p>
+                                    <Link to={link} as={NavLink}>
+                                        <div className="productlist-items p-2">
+                                            {elem.is_amazon_choice && <div className='best-seller'>Meget Choice</div>}
+                                            <div className="add-to-cart position-absolute top-0" onClick={() => addingToCart(elem)}>
+                                                <CiHeart size={30} />
                                             </div>
-                                            <div className="product-item-price d-flex mt-1">
-                                                <p className='discount-price mz-1 m-0'>{elem.product_price}</p>
-                                                <p className='original-price m-0'>{elem.product_original_price}</p>
+                                            <div className="product-item-img">
+                                                <img src={elem.product_photo} className='img-fluid mx-auto d-block' alt="" loading='lazy'/>
                                             </div>
+                                            <div className="about-product mt-1">
+                                                <div className="isPrime">{elem.is_prime && <><p className='m-0'>Sponsored<IoMdInformationCircleOutline className='me-1' /></p></>}</div>
+                                                <div className="product-item-title">
+                                                    <p className='m-0'>{title}...</p>
+                                                </div>
+                                                <div className="product-item-price d-flex mt-1">
+                                                    <p className='discount-price mz-1 m-0'>{elem.product_price}</p>
+                                                    <p className='original-price m-0'>{elem.product_original_price}</p>
+                                                </div>
 
-                                            {/* {elem.product_badge && <div className="product-bedge">
+                                                {/* {elem.product_badge && <div className="product-bedge">
                                             <p>{elem.product_badge}</p>
                                         </div>}
                                         <div className="total-sales">
@@ -250,9 +260,10 @@ export default function Home() {
                                         <div className="delivery-time">
                                             <p>{elem.delivery}</p>
                                         </div> */}
+                                            </div>
                                         </div>
-                                    </div>
-                                    {/* </Link> */}
+                                    </Link>
+
                                 </Col>
                             )
                         })}
@@ -269,35 +280,33 @@ export default function Home() {
                         <div className="left-btn" onClick={() => scrollingCloth(-350)}><FaChevronLeft size={30} /></div>
                         <div className="right-btn" onClick={() => scrollingCloth(350)}><FaChevronRight size={30} /></div>
                     </div>
-                    <div className="watch-head">
 
-                    </div>
                     <div className="home-scroll overflow-hidden d-flex flew-nowrap" ref={scrollCloth}>
                         {cloth.map(elem => {
-                            // const link=elem+'/Productlist'
+                            const link = '/Productdetail/' + elem.asin
                             const title = elem.product_title.slice(0, 40)
                             return (
                                 <Col key={elem.asin} md={2} sm={3} className='mb-3 position-relative overflow-hidden col-6'>
-                                    {/* <Link to={link} as={NavLink}> */}
-                                    <div className="productlist-items p-2">
-                                        {elem.is_amazon_choice && <div className='best-seller'>Meget Choice</div>}
-                                        <div className="add-to-cart position-absolute top-0" onClick={() => addingToCart(elem)}>
-                                            <CiHeart size={30} />
-                                        </div>
-                                        <div className="product-item-img">
-                                            <img src={elem.product_photo} className='img-fluid mx-auto d-block' alt="" />
-                                        </div>
-                                        <div className="about-product mt-1">
-                                            <div className="isPrime">{elem.is_prime && <><p className='m-0'>Sponsored<IoMdInformationCircleOutline className='me-1' /></p></>}</div>
-                                            <div className="product-item-title">
-                                                <p className='m-0'>{title}...</p>
+                                    <Link to={link} as={NavLink}>
+                                        <div className="productlist-items p-2">
+                                            {elem.is_amazon_choice && <div className='best-seller'>Meget Choice</div>}
+                                            <div className="add-to-cart position-absolute top-0" onClick={() => addingToCart(elem)}>
+                                                <CiHeart size={30} />
                                             </div>
-                                            <div className="product-item-price d-flex mt-1">
-                                                <p className='discount-price mz-1 m-0'>{elem.product_price}</p>
-                                                <p className='original-price m-0'>{elem.product_original_price}</p>
+                                            <div className="product-item-img">
+                                                <img src={elem.product_photo} className='img-fluid mx-auto d-block' alt="" loading='lazy'/>
                                             </div>
+                                            <div className="about-product mt-1">
+                                                <div className="isPrime">{elem.is_prime && <><p className='m-0'>Sponsored<IoMdInformationCircleOutline className='me-1' /></p></>}</div>
+                                                <div className="product-item-title">
+                                                    <p className='m-0'>{title}...</p>
+                                                </div>
+                                                <div className="product-item-price d-flex mt-1">
+                                                    <p className='discount-price mz-1 m-0'>{elem.product_price}</p>
+                                                    <p className='original-price m-0'>{elem.product_original_price}</p>
+                                                </div>
 
-                                            {/* {elem.product_badge && <div className="product-bedge">
+                                                {/* {elem.product_badge && <div className="product-bedge">
                                             <p>{elem.product_badge}</p>
                                         </div>}
                                         <div className="total-sales">
@@ -306,9 +315,9 @@ export default function Home() {
                                         <div className="delivery-time">
                                             <p>{elem.delivery}</p>
                                         </div> */}
+                                            </div>
                                         </div>
-                                    </div>
-                                    {/* </Link> */}
+                                    </Link>
                                 </Col>
                             )
                         })}
@@ -316,6 +325,6 @@ export default function Home() {
                 </Row>}
 
             </Container>
-        </div>
+        </div >
     )
 }

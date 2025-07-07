@@ -125,7 +125,7 @@ const DisplayItems = () => {
                                 <Col>
                                     <Col>
                                         <div className="cart-item-details">
-                                            <Link >
+                                            <Link to={`/Productdetail/${items.asin}`}>
                                                 <div className="item-title">{items.product_title}</div>
                                             </Link>
                                             <div className="item-rate-details mt-2">

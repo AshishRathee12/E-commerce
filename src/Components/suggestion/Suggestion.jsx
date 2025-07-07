@@ -48,8 +48,8 @@ export default function Suggestion({ name, data }) {
                                                             {elems.listgroup.map((item, j) => {
                                                                 const link = `/product-list/${item} ${elems.listitem}`
                                                                 return (
-                                                                    <Link to={link} as={NavLink}>
-                                                                        <li key={j} className='mb-3'>{item}</li>
+                                                                    <Link to={link} as={NavLink} key={j}>
+                                                                        <li  className='mb-3'>{item}</li>
                                                                     </Link>
                                                                 )
                                                             })}

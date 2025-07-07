@@ -82,7 +82,9 @@
     cursor: pointer;
 }
 
-
+.home-scroll a{
+    text-decoration: none;
+}
 
 
 
