@@ -1,9 +1,10 @@
-.suggestion-name{
+.suggestion-name {
     font-weight: 500;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .suggestion-name:hover {
     cursor: pointer;
 }
@@ -19,7 +20,7 @@
 .suggestion-display {
     position: absolute;
     background-color: #fff;
-    top: 70%;
+    top: 80%;
     right: 0%;
     left: 0%;
     z-index: 99;
@@ -31,10 +32,15 @@
     color: grey;
     cursor: pointer;
 }
-.suggestion-display a{
+
+.suggestion-display a {
     text-decoration: none;
 }
 
 .suggestion-display li:hover {
     color: #0053e2;
+}
+
+.suggest-lists {
+    box-shadow: 0px 1px 2px 0px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
 }

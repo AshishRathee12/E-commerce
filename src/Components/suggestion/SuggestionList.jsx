@@ -157,7 +157,7 @@ export default function SuggestionList() {
 
 
     return (
-        <Container fluid>
+        <Container fluid className='suggest-lists'>
             <Suggestion name={["Electronic", "TV & Appliences", "Men's", "Women's", "Kids & Baby"]} data={[Electronic, TvAppliences, MensFashion, WomensFashion, KidsAndBabyCare]} />
 
 

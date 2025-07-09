@@ -1,7 +1,7 @@
 import React from 'react'
 import './Productlist.css'
 export default function NextButton({ data, page }) {
-    const arr = [1, 2, 3, 4, 5]
+    const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     return (
         <div>
             <div className="next-btn">
