@@ -14,6 +14,7 @@ import { FaCheckCircle } from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux';
 import toast, { Toaster } from 'react-hot-toast';
 import { addItems } from '../Cart/Slice';
+import ProductLoading from './ProductLoading';
 
 export default function Productdetail() {
 
@@ -198,11 +199,11 @@ export default function Productdetail() {
     setReviewpage(elem)
   }
 
-  if (loading) return <div>...Loading</div>;
+  if (loading) return <div><ProductLoading /></div>;
 
   return (
     <div>
-      <div><Toaster
+      <div className='mt-2'><Toaster
         position="bottom-center"
         reverseOrder={false}
       /></div>
@@ -218,7 +219,7 @@ export default function Productdetail() {
                         // console.log(elem)
                         return (
                           <div className="img-list mb-2" key={index}>
-                            <img src={elem} alt="" onMouseEnter={() => changepic(elem)} loading='lazy'/>
+                            <img src={elem} alt="" onMouseEnter={() => changepic(elem)} loading='lazy' />
                           </div>
                         )
                       })}
@@ -241,7 +242,8 @@ export default function Productdetail() {
                     enlargedImageContainerDimensions: {
                       width: '170%',
                       height: '140%'
-                    }
+                    },
+
                   }} />
                   <div className="purchase-btn d-flex mt-4">
                     <div className="Add-to-cart me-3 w-50">

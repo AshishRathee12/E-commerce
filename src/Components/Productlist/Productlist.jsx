@@ -13,7 +13,9 @@ import NextButton from './NextButton';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItems } from '../Cart/Slice';
 import toast, { Toaster } from 'react-hot-toast';
-
+// import { FaChevronDown } from "react-icons/fa";
+import { IoIosStar } from "react-icons/io";
+import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 
 export default function ProductList() {
     const { id } = useParams();
@@ -30,7 +32,7 @@ export default function ProductList() {
     const selector = useSelector(state => state.Item);
 
     // price state 
-    const [values, setValues] = React.useState([1000]);
+    const [values, setValues] = useState([1000]);
 
     // sorting 
     const sortingArray = ["RELEVANCE", "LOWEST_PRICE", "HIGHEST_PRICE", "REVIEWS", "NEWEST", "BEST_SELLERS"]
@@ -140,6 +142,7 @@ export default function ProductList() {
     }, []);
 
 
+    // filter products ===
 
     // price Range 
 
@@ -155,6 +158,61 @@ export default function ProductList() {
         }
     }
 
+    // customer rating filter
+    // const ratings = [4, 3, 2, 1]
+    // const [selected, setSelected] = useState(null);
+    // const [showrating, setShowrating] = useState(false)
+
+    // const changerating = (index) => {
+    //     setSelected(index)
+    // }
+    // const showratingcontent = () => {
+    //     setShowrating(!showrating)
+    // }
+
+
+    const faqs = [
+        {
+            id: 1,
+            title: 'Customer Ratings',
+            content: [4, 3, 2, 1], // Example ratings
+        },
+        {
+          id: 2,
+          title: 'Product Condition',
+          content: ['ALL','NEW','USED','RENEWED','COLLECTIBLE'],
+        },
+        // {
+        //   id: 3,
+        //   title: 'Brand',
+        //   content: ['Apple', 'Samsung', 'Sony'],
+        // },
+    ];
+
+    const [openSections, setOpenSections] = useState({});
+
+    const toggleSection = (id) => {
+        setOpenSections((prev) => ({
+            ...prev,
+            [id]: !prev[id],
+        }));
+    };
+
+
+    const faqactive = (item) => {
+        const filtereddata = data.filter((elem, i) => {
+            const ratingnum = Number(elem.product_star_rating);
+            console.log(elem.product_star_rating > ratingnum)
+            return ratingnum > item;
+        });
+        console.log(filtereddata)
+        // setData(filtereddata)
+        setVisibleData(filtereddata)
+        // console.log(item)
+    }
+
+
+
 
     if (error) return <Loadinglist />
 
@@ -162,9 +220,17 @@ export default function ProductList() {
         return (
             <Container fluid>
                 <Row>
-                    <Col lg={2} className='mt-4'>
-                        <div className="filter-product-list">
+                    <Col lg={2} className='mt-4 position-sticky h-100 top-25 '>
+                        <div className="filter-product-list p-3">
+                            <div className="filter-heading">
+                                <p className='m-0'>Filter</p>
+                                <hr className='mt-0' />
+                            </div>
                             <div className="filter-price">
+                                <div className="filter-price-heading d-flex justify-content-between">
+                                    <p>Price</p>
+                                    <p className='clear-price' onClick={() => setValues([1000])} style={{ cursor: "pointer" }}>clear</p>
+                                </div>
                                 <Range
                                     label="Select your value"
                                     step={100}
@@ -200,11 +266,48 @@ export default function ProductList() {
                                         />
                                     )}
                                 />
-                                <div className="price-range d-flex">
-                                    <p>500 -</p>
-                                    <p>{values}</p>
+                                <div className="price-range d-flex justify-content-center mt-3">
+                                    <p className='price-starting'>500</p>-
+                                    <p className='price-ending'>{values}</p>
                                 </div>
                             </div>
+
+                            <div className="filter-faq mt-3">
+                                <div className="customer-rating">
+                                    <div className="accordion-container">
+                                        {faqs.map((faq) => (
+                                            <div className="faq-section" key={faq.id}>
+                                                <div
+                                                    className="faq-heading d-flex justify-content-between"
+                                                    onClick={() => toggleSection(faq.id)}
+                                                    style={{ cursor: 'pointer' }}
+                                                >
+                                                    <p className="m-0 me-2 faq-title">{faq.title}</p>
+                                                    <div className="down-icon">
+                                                        {openSections[faq.id] ? <FaChevronUp /> : <FaChevronDown />}
+                                                    </div>
+                                                </div>
+
+                                                {openSections[faq.id] && (
+                                                    <div className="faq-content">
+                                                        {faq.content.map((item, index) => (
+                                                            <div key={index} className="faq-item">
+                                                                <input type="radio" name={faq.title} id={`${faq.id}-${index}`} onChange={() => faqactive(item)} />
+                                                                <label htmlFor={`${faq.id}-${index}`}>
+                                                                    {item}
+                                                                </label>
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                )}
+                                                <hr />
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                </div>
+                            </div>
+
                         </div>
                     </Col>
                     <Col lg={10}>
