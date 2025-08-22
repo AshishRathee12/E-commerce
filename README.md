@@ -1,4 +1,5 @@
 # React + Vite
+<!-- if we dont want to add duplicate items into a state object then use id like in productlist.jsx it will not add the same id again instead it override the previous one  -->
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 

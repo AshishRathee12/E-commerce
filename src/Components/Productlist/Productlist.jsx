@@ -178,15 +178,10 @@ export default function ProductList() {
             content: [4, 3, 2, 1], // Example ratings
         },
         {
-          id: 2,
-          title: 'Product Condition',
-          content: ['ALL','NEW','USED','RENEWED','COLLECTIBLE'],
+            id: 2,
+            title: 'Product Condition',
+            content: ['ALL', 'NEW', 'USED', 'RENEWED', 'COLLECTIBLE'],
         },
-        // {
-        //   id: 3,
-        //   title: 'Brand',
-        //   content: ['Apple', 'Samsung', 'Sony'],
-        // },
     ];
 
     const [openSections, setOpenSections] = useState({});
@@ -211,6 +206,17 @@ export default function ProductList() {
         // console.log(item)
     }
 
+    // const [recent, setRecent] = useState({})
+    const [recent, setRecent] = useState([])
+
+    const addtorecent = (elem) => {
+        // setRecent(prev => ({[elem.asin]: elem, ...prev }))
+        setRecent(prev => ([elem, ...prev]))
+    }
+    useEffect(() => {
+        console.log(recent)
+        localStorage.setItem("recentviewed", JSON.stringify(recent))
+    }, [recent])
 
 
 
@@ -343,36 +349,36 @@ export default function ProductList() {
                                         const linked = "/Productdetail/" + elem.asin;
                                         return (
                                             <Col key={elem.asin} lg={3} md={4} className='mb-3 position-relative overflow-hidden productlist-main col-6'>
-                                                <div className="productlist-items p-2">
+                                                <div className="productlist-items p-2" onClick={() => addtorecent(elem)}>
                                                     {elem.is_amazon_choice && <div className='best-seller'>Meget Choice</div>}
                                                     <div className="add-to-cart position-absolute top-0" onClick={() => addingToCart(elem)}>
                                                         <CiHeart size={30} />
                                                     </div>
-                                                    <Link to={linked} as={NavLink}>
-                                                        <div className="product-item-img">
-                                                            <img src={elem.product_photo} className='img-fluid mx-auto d-block' alt="" loading='lazy' />
+                                                    {/* <Link to={linked} as={NavLink} > */}
+                                                    <div className="product-item-img">
+                                                        <img src={elem.product_photo} className='img-fluid mx-auto d-block' alt="" loading='lazy' />
+                                                    </div>
+                                                    <div className="about-product mt-2">
+                                                        <div className="isPrime">{elem.is_prime && <><p className='m-0'>Sponsored<IoMdInformationCircleOutline className='me-1' /></p></>}</div>
+                                                        <div className="product-item-title">
+                                                            <p className='m-0'>{title}...</p>
                                                         </div>
-                                                        <div className="about-product mt-2">
-                                                            <div className="isPrime">{elem.is_prime && <><p className='m-0'>Sponsored<IoMdInformationCircleOutline className='me-1' /></p></>}</div>
-                                                            <div className="product-item-title">
-                                                                <p className='m-0'>{title}...</p>
-                                                            </div>
-                                                            <div className="product-item-price d-flex mt-1">
-                                                                <p className='discount-price mz-1 m-0'>{elem.product_price}</p>
-                                                                <p className='original-price m-0'>{elem.product_original_price}</p>
-                                                            </div>
+                                                        <div className="product-item-price d-flex mt-1">
+                                                            <p className='discount-price mz-1 m-0'>{elem.product_price}</p>
+                                                            <p className='original-price m-0'>{elem.product_original_price}</p>
+                                                        </div>
 
-                                                            {elem.product_badge && <div className="product-bedge">
-                                                                <p>{elem.product_badge}</p>
-                                                            </div>}
-                                                            <div className="total-sales">
-                                                                <p>{elem.sales_volume}</p>
-                                                            </div>
-                                                            <div className="delivery-time">
-                                                                <p>{elem.delivery}</p>
-                                                            </div>
+                                                        {elem.product_badge && <div className="product-bedge">
+                                                            <p>{elem.product_badge}</p>
+                                                        </div>}
+                                                        <div className="total-sales">
+                                                            <p>{elem.sales_volume}</p>
                                                         </div>
-                                                    </Link>
+                                                        <div className="delivery-time">
+                                                            <p>{elem.delivery}</p>
+                                                        </div>
+                                                    </div>
+                                                    {/* </Link> */}
                                                 </div>
                                             </Col>
                                         )

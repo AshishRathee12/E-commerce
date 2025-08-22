@@ -24,6 +24,7 @@ export default function Home() {
 
     const scrollWatch = useRef(null)
     const scrollCloth = useRef(null)
+    const scrollrecent = useRef(null)
 
     const reduxdata = useSelector(state => state.Item)
 
@@ -83,10 +84,18 @@ export default function Home() {
         fetchProducts();
     }, []);
 
+    const [recent, setRecent] = useState([])
 
     useEffect(() => {
         document.title = "Online shopping site in india";
+        const recentviewed = localStorage.getItem("recentviewed");
+        if (recentviewed) {
+            setRecent(JSON.parse(recentviewed))
+            return;
+        }
     }, []);
+
+
 
     // Adding to cart 
     const dispatch = useDispatch();
@@ -107,6 +116,9 @@ export default function Home() {
     }
     const scrollingWatch = (scrollval) => {
         scrollWatch.current.scrollLeft += scrollval;
+    }
+    const scrollingrecent = (scrollval) => {
+        scrollrecent.current.scrollLeft += scrollval;
     }
 
 
@@ -239,7 +251,7 @@ export default function Home() {
                                                 <CiHeart size={30} />
                                             </div>
                                             <div className="product-item-img">
-                                                <img src={elem.product_photo} className='img-fluid mx-auto d-block' alt="" loading='lazy'/>
+                                                <img src={elem.product_photo} className='img-fluid mx-auto d-block' alt="" loading='lazy' />
                                             </div>
                                             <div className="about-product mt-1">
                                                 <div className="isPrime">{elem.is_prime && <><p className='m-0'>Sponsored<IoMdInformationCircleOutline className='me-1' /></p></>}</div>
@@ -294,7 +306,7 @@ export default function Home() {
                                                 <CiHeart size={30} />
                                             </div>
                                             <div className="product-item-img">
-                                                <img src={elem.product_photo} className='img-fluid mx-auto d-block' alt="" loading='lazy'/>
+                                                <img src={elem.product_photo} className='img-fluid mx-auto d-block' alt="" loading='lazy' />
                                             </div>
                                             <div className="about-product mt-1">
                                                 <div className="isPrime">{elem.is_prime && <><p className='m-0'>Sponsored<IoMdInformationCircleOutline className='me-1' /></p></>}</div>
@@ -324,6 +336,50 @@ export default function Home() {
                     </div>
                 </Row>}
 
+              {<Row className=' position-relative mt-4' >
+                    <div className="view-more d-flex justify-content-between ">
+                        <h3>Recent viewed ...</h3>
+                        <Link to='/product-list/clothes' as={NavLink}>
+                            <p className=''>View More</p>
+                        </Link>
+                    </div>
+                    <div className="scroll-btn">
+                        <div className="left-btn" onClick={() => scrollingrecent(-350)}><FaChevronLeft size={30} /></div>
+                        <div className="right-btn" onClick={() => scrollingrecent(350)}><FaChevronRight size={30} /></div>
+                    </div>
+
+                    <div className="home-scroll overflow-hidden d-flex flew-nowrap" ref={scrollrecent}>
+                        {recent.map(elem => {
+                            const link = '/Productdetail/' + elem.asin
+                            const title = elem.product_title.slice(0, 40)
+                            return (
+                                <Col key={elem.asin} md={2} sm={3} className='mb-3 position-relative overflow-hidden col-6'>
+                                    <Link to={link} as={NavLink}>
+                                        <div className="productlist-items p-2">
+                                            {elem.is_amazon_choice && <div className='best-seller'>Meget Choice</div>}
+                                            <div className="add-to-cart position-absolute top-0" onClick={() => addingToCart(elem)}>
+                                                <CiHeart size={30} />
+                                            </div>
+                                            <div className="product-item-img">
+                                                <img src={elem.product_photo} className='img-fluid mx-auto d-block' alt="" loading='lazy' />
+                                            </div>
+                                            <div className="about-product mt-1">
+                                                <div className="isPrime">{elem.is_prime && <><p className='m-0'>Sponsored<IoMdInformationCircleOutline className='me-1' /></p></>}</div>
+                                                <div className="product-item-title">
+                                                    <p className='m-0'>{title}...</p>
+                                                </div>
+                                                <div className="product-item-price d-flex mt-1">
+                                                    <p className='discount-price mz-1 m-0'>{elem.product_price}</p>
+                                                    <p className='original-price m-0'>{elem.product_original_price}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </Link>
+                                </Col>
+                            )
+                        })}
+                    </div>
+                </Row>}
             </Container>
         </div >
     )
