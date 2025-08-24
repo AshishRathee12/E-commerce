@@ -129,6 +129,101 @@
 }
 
 
+
+/* speaker.jsx  */
+
+.speak-content {
+    background-color: rgb(32, 54, 182);
+    width: 40%;
+    left: 30%;
+    top: 95%;
+    height: 50vh;
+    z-index: 99;
+}
+.speaked{
+    font-size: 20px;
+    color: #fff;
+}
+.stop-speech{
+    cursor: pointer;
+}
+.speaker-container{
+    top: 60%;
+}
+.voice-speaker {
+    width: 70px;
+    height: 70px;
+    background-color: #e70000;
+    border-radius: 50%;
+    z-index:1;
+    /* top: 59%;
+    left: 43%; */
+}
+
+.speaker-waves {
+    width: 100px;
+    height: 100px;
+    /* top: 55%;
+    left: 41%; */
+    border-radius: 50%;
+    background-color: #ffffff;
+    animation: example 4s infinite;
+    position: absolute;
+    /* make sure it's positioned */
+    transform-origin: center center;
+    /* scale from center */
+}
+
+@keyframes example {
+    0% {
+        transform: scale(1);
+        background-color: #e4e3e3;
+        opacity: 1;
+    }
+    10% {
+        transform: scale(0.9);
+        background-color: #a2a2a2c7;
+        opacity: 0.6;
+    }
+    20% {
+        transform: scale(1.1);
+        background-color: #dddcdc8a;
+        opacity: 0.8;
+    }
+    35% {
+        transform: scale(0.95);
+        background-color: #f8f6f6b8;
+        opacity: 0.4;
+    }
+    50% {
+        transform: scale(1.05);
+        background-color: #d6d5d5c7;
+        opacity: 0.7;
+    }
+    65% {
+        transform: scale(0.85);
+        background-color: #e3e1e19e;
+        opacity: 0.5;
+    }
+    80% {
+        transform: scale(1.1);
+        background-color: #c5c5c5;
+        opacity: 0.9;
+    }
+    100% {
+        transform: scale(1);
+        background-color: #dadada;
+        opacity: 1;
+    }
+}
+
+
+
+
+
+
+
+
 @media (max-width:576px) {
 
     .side-sign-in-thumbnail p,
